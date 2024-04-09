@@ -4,6 +4,15 @@ from torchvision.transforms import transforms
 import torch
 from generator_model import Generator
 
+# Assuming your Streamlit script is running and banner.jpg is in the same folder
+banner_path = 'banner.jpg'  # Adjust path if your image is in a different folder
+
+st.set_page_config(page_title="gen3_pokeGAN", page_icon=":sparkles:", layout="wide")
+
+# Display the banner image at the top of the page
+banner_image = Image.open(banner_path)
+st.image(banner_image, use_column_width='always')
+
 # New caching command
 @st.cache_resource
 def load_model(model_path):
@@ -27,18 +36,6 @@ def generate_image(image, generator):
 
 # Load the generator model
 generator = load_model('gen_Sprite.pth.tar')
-
-import streamlit as st
-
-st.set_page_config(
-    page_title="gen3_pokeGAN",
-    page_icon=":sparkles:",
-    layout="wide",
-    initial_sidebar_state="auto"
-)
-
-st.title('Welcome to Gen3 PokeGAN!')
-
 
 st.title('Welcome to Gen3 PokeGAN!')
 
