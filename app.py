@@ -4,21 +4,6 @@ from torchvision.transforms import transforms
 import torch
 from generator_model import Generator
 
-# Function to toggle sidebar visibility using JavaScript
-def open_sidebar():
-    st.markdown(
-        """
-        <button onclick="toggleSidebar()">Open Sidebar</button>
-        <script>
-            function toggleSidebar() {
-                const sidebar = document.querySelector('.sidebar');
-                sidebar.classList.toggle('collapsed');
-            }
-        </script>
-        """,
-        unsafe_allow_html=True
-    )
-
 # New caching command
 @st.cache_resource
 def load_model(model_path):
@@ -43,10 +28,20 @@ def generate_image(image, generator):
 # Load the generator model
 generator = load_model('gen_Sprite.pth.tar')
 
-st.title('Welcome to Gen3 PokeGAN!')
+# Set page configuration
+st.set_page_config(
+    page_title="gen3_pokeGAN",
+    page_icon=":sparkles:",
+    layout="wide",
+    initial_sidebar_state="auto",
+    menu_items={
+        'Get Help': 'https://www.example.com/help',
+        'Report a bug': 'https://www.example.com/bug',
+        'About': "This is a header. This is an *extremely* cool app!"
+    }
+)
 
-# Call the function to display the button
-open_sidebar()
+st.title('Welcome to Gen3 PokeGAN!')
 
 st.markdown("""
 Generation 3 of the Pokemon games (e.g.,  Ruby/Sapphire/Emerald) had a unique pixel art style for the pokemon. Here you can input the new pokemon models, and it will show you how it would look like in pokemon Ruby/Sapphire/Emerald!
