@@ -4,14 +4,12 @@ from torchvision.transforms import transforms
 import torch
 from generator_model import Generator
 
-# Assuming your Streamlit script is running and banner.jpg is in the same folder
-banner_path = 'banner.jpg'  # Adjust path if your image is in a different folder
-
-st.set_page_config(page_title="gen3_pokeGAN", page_icon=":sparkles:", layout="wide")
-
-# Display the banner image at the top of the page
-banner_image = Image.open(banner_path)
-st.image(banner_image, use_column_width='always')
+# Function to open sidebar
+def open_sidebar():
+    # Use markdown to create a button or link
+    st.markdown("""
+        <button onclick="document.querySelector('.sidebar').classList.toggle('sidebar-closed')">Open Sidebar</button>
+    """, unsafe_allow_html=True)
 
 # New caching command
 @st.cache_resource
@@ -38,6 +36,9 @@ def generate_image(image, generator):
 generator = load_model('gen_Sprite.pth.tar')
 
 st.title('Welcome to Gen3 PokeGAN!')
+
+# Call the function to display the button
+open_sidebar()
 
 st.markdown("""
 Generation 3 of the Pokemon games (e.g.,  Ruby/Sapphire/Emerald) had a unique pixel art style for the pokemon. Here you can input the new pokemon models, and it will show you how it would look like in pokemon Ruby/Sapphire/Emerald!
