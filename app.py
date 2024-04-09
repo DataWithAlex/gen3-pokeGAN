@@ -4,12 +4,20 @@ from torchvision.transforms import transforms
 import torch
 from generator_model import Generator
 
-# Function to open sidebar
+# Function to toggle sidebar visibility using JavaScript
 def open_sidebar():
-    # Use markdown to create a button or link
-    st.markdown("""
-        <button onclick="document.querySelector('.sidebar').classList.toggle('sidebar-closed')">Open Sidebar</button>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        """
+        <button onclick="toggleSidebar()">Open Sidebar</button>
+        <script>
+            function toggleSidebar() {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('collapsed');
+            }
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
 
 # New caching command
 @st.cache_resource
