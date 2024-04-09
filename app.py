@@ -28,18 +28,17 @@ def generate_image(image, generator):
 # Load the generator model
 generator = load_model('gen_Sprite.pth.tar')
 
-# Set page configuration
+import streamlit as st
+
 st.set_page_config(
     page_title="gen3_pokeGAN",
     page_icon=":sparkles:",
     layout="wide",
-    initial_sidebar_state="auto",
-    menu_items={
-        'Get Help': 'https://www.example.com/help',
-        'Report a bug': 'https://www.example.com/bug',
-        'About': "This is a header. This is an *extremely* cool app!"
-    }
+    initial_sidebar_state="auto"
 )
+
+st.title('Welcome to Gen3 PokeGAN!')
+
 
 st.title('Welcome to Gen3 PokeGAN!')
 
