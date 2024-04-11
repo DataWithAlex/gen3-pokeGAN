@@ -1,6 +1,12 @@
 import streamlit as st
 from PIL import Image
 from torchvision.transforms import transforms
+from generator_model import Generator
+import torch
+import gdown
+import streamlit as st
+from PIL import Image
+from torchvision.transforms import transforms
 import torch
 from generator_model import Generator
 
@@ -13,13 +19,17 @@ st.set_page_config(page_title="gen3_pokeGAN", page_icon=":sparkles:", layout="wi
 banner_image = Image.open(banner_path)
 st.image(banner_image, use_column_width='always')
 
-# New caching command
-@st.cache_resource
-def load_model(model_path):
-    model = Generator(img_channels=3, num_residuals=9)
-    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu'))['state_dict'])
-    model.eval()
-    return model
+# Download model weights from Google Drive
+@st.cache_data
+def download_model():
+    url = 'https://drive.google.com/uc?id=1FU0ANpVWlfgDCWJgvTLz3B66Ec9LpnT5'
+    output = 'gen_Sprite.pth.tar'
+    gdown.download(url, output, quiet=False)
+
+    return output
+
+
+model_path = download_model()
 
 def generate_image(image, generator):
     transform = transforms.Compose([
@@ -34,8 +44,15 @@ def generate_image(image, generator):
     generated_image = transforms.ToPILImage()(generated_tensor)
     return generated_image
 
+
 # Load the generator model
-generator = load_model('gen_Sprite.pth.tar')
+def load_model(model_path):
+    model = Generator(img_channels=3, num_residuals=9)
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu'))['state_dict'])
+    model.eval()
+    return model
+
+generator = load_model(model_path)
 
 st.title('Welcome to Gen3 PokeGAN!')
 
