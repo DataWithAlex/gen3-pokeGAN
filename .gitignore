@@ -1,0 +1,8 @@
+data/
+Best_Model_Weights/
+Alex_Testing/
+venv/
+__pycache__/
+*.ipynb_checkpoints
+.DS_Store
+*.pth.tar
