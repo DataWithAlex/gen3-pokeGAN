@@ -5,6 +5,9 @@
 ## Introduction
 Gen3-PokeGAN is a machine learning project utilizing CycleGAN architecture to transform modern Pokémon images into the iconic pixel art style of Generation 3 (Gen3), reminiscent of the visuals from Pokémon Ruby and Sapphire. Our goal is to reimagine Pokémon in the nostalgic pixel style that many fans adored, using a model that inputs a 3D model-style image and outputs a pixel art-style image.
 
+[Gen3-PokeGAN Project Document](./Gen3-PokeGAN%20Project.html)
+
+
 ![alt text](assets/image-5.png)
 
 ## Live Demonstration
