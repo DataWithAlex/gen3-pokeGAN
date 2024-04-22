@@ -30,7 +30,7 @@ Ensure you have the following installed:
 - PyTorch 1.7 or higher
 - CUDA Toolkit (if using GPU acceleration)
 
-### Installation
+## Installation
 
 Clone the repository and install the required dependencies:
 
@@ -39,6 +39,18 @@ git clone https://github.com/DataWithAlex/gen3-pokeGAN.git
 cd gen3-pokeGAN
 pip install -r requirements.txt
 ```
+
+### Model Weights
+
+You can download the model weights here:
+
+[gen-Sprite.pth.tar](https://drive.google.com/file/d/1XWFPS935GUG_540w9FFJHebt3W2yfyvE/view?usp=sharing)
+
+[gen_3D.pth.tar](https://drive.google.com/file/d/19DJXFptBt1YFuxFnYIC1x3c5ye9c4F_f/view?usp=sharing)
+
+[critic_3D.pth.tar](https://drive.google.com/file/d/1lrFaWINel_svxve_37XIqwRwU8FLGSvR/view?usp=sharing)
+
+[critic_Sprite.pth.tar](https://drive.google.com/file/d/1xrJLPmiHFIN3ML1G-DJod331R6OsKfxw/view?usp=sharing)
 
 ## Repository Structure
 
