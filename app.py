@@ -22,7 +22,7 @@ st.image(banner_image, use_column_width='always')
 # Download model weights from Google Drive
 @st.cache_data
 def download_model():
-    url = 'https://drive.google.com/uc?id=1FU0ANpVWlfgDCWJgvTLz3B66Ec9LpnT5'
+    url = 'https://drive.google.com/file/d/1W3n1cXjoby2wps_mvUP7y9e71nBytksz/view?usp=sharing'
     output = 'gen_Sprite.pth.tar'
     gdown.download(url, output, quiet=False)
 
