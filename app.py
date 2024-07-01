@@ -4,11 +4,7 @@ from torchvision.transforms import transforms
 from generator_model import Generator
 import torch
 import gdown
-import streamlit as st
-from PIL import Image
-from torchvision.transforms import transforms
-import torch
-from generator_model import Generator
+import os
 
 # Assuming your Streamlit script is running and banner.jpg is in the same folder
 banner_path = 'banner.jpg'  # Adjust path if your image is in a different folder
@@ -22,12 +18,16 @@ st.image(banner_image, use_column_width='always')
 # Download model weights from Google Drive
 @st.cache_data
 def download_model():
-    url = 'https://drive.google.com/file/d/1W3n1cXjoby2wps_mvUP7y9e71nBytksz/view?usp=sharing'
+    file_id = '1W3n1cXjoby2wps_mvUP7y9e71nBytksz'
+    url = f"https://drive.google.com/uc?export=download&confirm=pbef&id={file_id}"
     output = 'gen_Sprite.pth.tar'
+    
     gdown.download(url, output, quiet=False)
+    
+    if not os.path.exists(output):
+        raise FileNotFoundError(f"Failed to download the model file: {output}")
 
     return output
-
 
 model_path = download_model()
 
@@ -44,11 +44,13 @@ def generate_image(image, generator):
     generated_image = transforms.ToPILImage()(generated_tensor)
     return generated_image
 
-
 # Load the generator model
 def load_model(model_path):
     model = Generator(img_channels=3, num_residuals=9)
-    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu'))['state_dict'])
+    try:
+        model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu'))['state_dict'])
+    except Exception as e:
+        raise RuntimeError(f"Error loading the model: {e}")
     model.eval()
     return model
 
@@ -57,7 +59,7 @@ generator = load_model(model_path)
 st.title('Welcome to Gen3 PokeGAN!')
 
 st.markdown("""
-Generation 3 of the Pokemon games (e.g.,  Ruby/Sapphire/Emerald) had a unique pixel art style for the pokemon. Here you can input the new pokemon models, and it will show you how it would look like in pokemon Ruby/Sapphire/Emerald!
+Generation 3 of the Pokemon games (e.g., Ruby/Sapphire/Emerald) had a unique pixel art style for the pokemon. Here you can input the new pokemon models, and it will show you how it would look like in pokemon Ruby/Sapphire/Emerald!
 """)
 
 # Sidebar for image upload
